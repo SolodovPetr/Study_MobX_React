@@ -1,10 +1,12 @@
-import useStore from './hooks/useStore';
+import { observer } from 'mobx-react-lite';
+ import useStore from './hooks/useStore';
 
 function App() {
-  const store = useStore();
-  console.log(store);
+  const { users, boards } = useStore();
+  console.log('Users', users.toJSON());
+  console.log('Boards', boards.toJSON());
 
   return <div>Hello!</div>;
 }
 
-export default App;
+export default observer(App);
