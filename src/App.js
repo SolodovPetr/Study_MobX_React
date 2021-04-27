@@ -1,9 +1,10 @@
+import useStore from './hooks/useStore';
+
 function App() {
-  return (
-    <div>
-      Hello!
-    </div>
-  );
+  const store = useStore();
+  console.log(store);
+
+  return <div>Hello!</div>;
 }
 
 export default App;

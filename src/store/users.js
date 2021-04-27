@@ -9,11 +9,14 @@ const User = types.model('User', {
   avatar: types.string,
 });
 
+export const UserMe = User.named('UserMe');
+
 // Describe store
 const UsersStore = types.model('UsersStore', {
     // Maybe due to load from api, so can be undefined
     users: types.maybe(types.array(User)),
-  })
+    me: types.maybe(UserMe)
+  })    
   // Actions for this store
   .actions((self) => {
     // object with actions
@@ -21,6 +24,7 @@ const UsersStore = types.model('UsersStore', {
       // generator, can't use Promise with mobx-state-tree
       load: flow(function* () {
         self.users = yield serverApi.get('users');
+        self.me = yield serverApi.get('me');
       }),
       // hook
       afterCreate() {
